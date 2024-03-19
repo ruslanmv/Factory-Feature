@@ -14,6 +14,20 @@ Factory Feature is a project that aims to create a Generative AI program that an
 
 Factory Feature leverages the power of Generative AI to analyze the structure and elements of existing projects and create new, customized versions based on specific feature requests. By using LLM by WatsonX.ai, Factory Feature can intelligently understand the context and relationships within the project and generate a new project that incorporates the desired features seamlessly.
 
+The primary objective of Factory Feature is to save time and resources by automating the process of understanding, modifying, and updating existing projects according to specific user requirements. Through its advanced AI-driven approach, Factory Feature can rapidly adapt to any project type and generate a new version tailored to the desired features, significantly reducing the manual effort and complexity usually involved in customizing software projects.
+
+Key Features:
+
+1. Generative AI-powered software customization: Factory Feature employs LLM by WatsonX.ai to intelligently analyze existing projects and generate new versions with the desired features.
+2. Vector Database creation: The AI program creates a Vector Database that stores all project components, facilitating efficient retrieval and analysis of project elements.
+3. Context-aware feature integration: Factory Feature understands the context and relationships within the project, ensuring that new features are integrated coherently and consistently.
+4. Streamlined project updates: Factory Feature automates the process of updating and modifying projects, significantly reducing the time and effort required for software customization.
+5. Language and framework agnostic: The AI-driven approach of Factory Feature enables it to work seamlessly with a wide range of programming languages, libraries, and frameworks.
+
+By providing a powerful and intuitive solution for software customization, Factory Feature has the potential to revolutionize the way developers approach project updates and modifications, leading to more efficient and effective software development processes.
+
+
+
 ## Installation
 
 1. Clone the repository:
