@@ -14,7 +14,7 @@ def save_to_txt(file_list):
     print("File names saved to files.txt")
 
 if __name__ == "__main__":
-    directory = "./current_project"
+    directory = "./"
     file_list = search_files(directory)
     save_to_txt(file_list)
     
