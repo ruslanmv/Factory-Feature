@@ -33,7 +33,7 @@ By providing a powerful and intuitive solution for software customization, Facto
 1. Clone the repository:
 
 ```
-git clone https://github.com/yourusername/factory-feature.git
+git clone https://github.com/ruslanmv/factory-feature.git
 ```
 
 2. Change the working directory:
