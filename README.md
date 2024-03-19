@@ -1,5 +1,7 @@
 # Factory Feature
+
 ![alt text](./assets/logo.jpeg)
+
 Factory Feature is a project that aims to create a Generative AI program that analyzes all elements of a given project directory and uses the LLM by WatsonX.ai to create a Vector Database. This database stores all the projects, and when prompted about a feature to include, the program analyzes all elements of the project and creates a new project with all the elements updated, tailored to the feature requested in the prompt. The original project is located in the `project_old` folder, and the new project is copied to the `project_new` folder.
 
 ## Table of Contents
