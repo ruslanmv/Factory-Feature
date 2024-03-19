@@ -55,7 +55,7 @@ pip install -r requirements.txt
 2. Run the Factory Feature program:
 
 ```
-python main.py --prompt "your feature request"
+python app.py --prompt "your feature request"
 ```
 
 3. The new project with the requested feature will be generated in the `project_new` folder.
