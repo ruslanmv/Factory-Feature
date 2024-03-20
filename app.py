@@ -19,6 +19,8 @@ def check_file_readability(file_list):
             with open(file_path, 'r') as file:
                 content = file.read()
                 extension = get_file_extension(file_path)
+
+                
                 df = df.append({'Path': file_path, 'Read': 'YES', 'Extension': extension, 'Content': content}, ignore_index=True)
         except (UnicodeDecodeError, IOError):
             extension = get_file_extension(file_path)
