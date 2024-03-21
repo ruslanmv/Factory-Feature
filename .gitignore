@@ -8,3 +8,5 @@ venv/*
 backend/.chroma/*
 env.sh
 */backup/*
+notebook/chroma/*
+notebook/chroma_db/*
