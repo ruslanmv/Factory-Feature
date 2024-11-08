@@ -211,5 +211,5 @@ We welcome contributions from the community! To contribute:
 
 ## License
 
-Factory Feature is released under the MIT License. See the [LICENSE](LICENSE) file for more details.
+Factory Feature is released under the MIT License. See the [LICENSE](LICENSE.md) file for more details.
 
