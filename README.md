@@ -36,7 +36,8 @@ Factory Feature works seamlessly with a wide range of programming languages, lib
 - **Streamlined project updates**: Automates the process of modifying and updating software projects.
 - **Language and framework agnostic**: Supports a wide range of programming languages and technologies.
 
-
+## Structure of the Project
+```
 factory-feature/
 ├── project_old/                  # Folder for the original project
 │   └── ...                       # Original project files and directories
@@ -92,7 +93,7 @@ factory-feature/
 ├── LICENSE                       # License information
 ├── .gitignore                    # Git ignore rules
 └── setup.py                      # Script for installing the project as a Python package
-
+```
 
 ---
 
