@@ -1,2 +1,0 @@
-./project_old\README.md
-./project_old\src\app.py
