@@ -1,0 +1,1 @@
+Add a user authentication system to the project. The system should validate user credentials and handle login/logout functionality.
