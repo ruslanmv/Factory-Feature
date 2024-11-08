@@ -1,12 +1,4 @@
-
-backup/*
-venv/*
-.venv/
+__pycache__/
+*.pyc
 .env
-*/.ipynb_checkpoints/*
-.ipynb_checkpoints*
-backend/.chroma/*
-env.sh
-*/backup/*
-notebook/chroma/*
-notebook/chroma_db/*
+project_new/

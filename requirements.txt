@@ -1,0 +1,4 @@
+langchain
+sentence-transformers
+ibm-watson-machine-learning
+PyYAML

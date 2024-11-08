@@ -1,0 +1,12 @@
+
+backup/*
+venv/*
+.venv/
+.env
+*/.ipynb_checkpoints/*
+.ipynb_checkpoints*
+backend/.chroma/*
+env.sh
+*/backup/*
+notebook/chroma/*
+notebook/chroma_db/*
