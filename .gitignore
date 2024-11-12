@@ -2,3 +2,8 @@ __pycache__/
 *.pyc
 .env
 project_new/
+/backup
+/notebook/chroma_db
+/notebooks/chroma_db
+*.pkl
+/chroma_db

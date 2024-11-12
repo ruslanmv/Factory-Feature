@@ -1,4 +1,16 @@
 langchain
 sentence-transformers
-ibm-watson-machine-learning
+#ibm-watson-machine-learning
+ibm_watson_machine_learning
 PyYAML
+python-dotenv
+langchain_community
+#langchain-ibm
+chromadb
+langchain_huggingface
+
+
+langchain-ibm 
+langchain-huggingface 
+chromadb
+langchain_chroma
