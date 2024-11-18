@@ -1,72 +1,69 @@
-from langchain_ibm import WatsonxLLM
-from langchain.chains import RetrievalQA
+# llm_inference.py
 import os
 from dotenv import load_dotenv
+from langchain.chains import RetrievalQA
+from langchain_chroma import Chroma
+from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_ibm import WatsonxLLM
+from chromadb import PersistentClient
+import torch
 
-# Function to query the WatsonxLLM model
+# Load credentials from .env file
+load_dotenv()
+WATSONX_APIKEY = os.getenv("WATSONX_APIKEY")
+PROJECT_ID = os.getenv("PROJECT_ID")
+
+if not WATSONX_APIKEY or not PROJECT_ID:
+    raise ValueError("API key or Project ID is missing. Please check your .env file.")
+
+def get_lang_chain_model(model_type, max_tokens, min_tokens, decoding_method, temperature):
+    """
+    Initializes and returns a WatsonxLLM instance with the specified parameters.
+    """
+    return WatsonxLLM(
+        model_id=model_type,
+        url="https://eu-gb.ml.cloud.ibm.com",
+        project_id=PROJECT_ID,
+        params={
+            "max_new_tokens": max_tokens,
+            "min_new_tokens": min_tokens,
+            "decoding_method": decoding_method,
+            "temperature": temperature,
+        },
+    )
+
 def query_llm(prompt="", vector_db=None):
     """
     Queries the WatsonxLLM model. If a vector database is provided, it performs
-    a retrieval augmented generation. Otherwise, it performs a simple inference.
+    a retrieval-augmented generation. Otherwise, it performs a simple inference.
 
     :param prompt: The input prompt for the model.
     :param vector_db: Optional. The vector database object.
     :return: The response from the model.
     """
     try:
-        # Load credentials from .env file
-        load_dotenv()
+        # Specify model parameters
+        model_type = "meta-llama/llama-3-1-70b-instruct"
+        max_tokens = 300
+        min_tokens = 100
+        decoding_method = "greedy"
+        temperature = 0.7
 
-        # Fetch credentials or prompt the user if missing
-        WATSONX_APIKEY = os.getenv("WATSONX_APIKEY")
-        PROJECT_ID = os.getenv("PROJECT_ID")
-
-        if not WATSONX_APIKEY:
-            WATSONX_APIKEY = input("WML API key not found in .env. Please enter your WML API key: ").strip()
-            print("Reminder: Save your WML API key to the .env file for future use.")
-        if not PROJECT_ID:
-            PROJECT_ID = input("Project ID not found in .env. Please enter your project ID: ").strip()
-            print("Reminder: Save your Project ID to the .env file for future use.")
-
-        # Watsonx credentials
-        credentials = {
-            "url": "https://eu-gb.ml.cloud.ibm.com",  # Update the URL as required
-            "apikey": WATSONX_APIKEY,
-            "project_id": PROJECT_ID,
-        }
-
-        # WatsonxLLM parameters
-        parameters = {
-            "max_new_tokens": 100,
-            "min_new_tokens": 10,
-            "decoding_method": "greedy",
-            "temperature": 0.7,
-        }
-
-        # System prompt for context
-        system_prompt = (
-            "You are a highly capable and knowledgeable AI assistant based on the meta-llama/llama-3-70b-instruct model. "
-            "Your task is to provide detailed, accurate, and helpful answers to the user's questions. "
-            "If required, you will use retrieval-augmented methods to ensure your responses are up-to-date and relevant."
-        )
-
-        # Initialize WatsonxLLM with system prompt
-        model = WatsonxLLM(
-            model_id="meta-llama/llama-3-1-70b-instruct",
-            url=credentials["url"],
-            project_id=credentials["project_id"],
-            params=parameters,
-            system_prompt=system_prompt,  # Adding the system prompt
-        )
+        # Initialize the WatsonxLLM model
+        model = get_lang_chain_model(model_type, max_tokens, min_tokens, decoding_method, temperature)
 
         if vector_db:
-            # Set up retriever and chain for retrieval augmented generation
-            retriever = vector_db.as_retriever()
-            qa = RetrievalQA.from_chain_type(llm=model, retriever=retriever)
-            response = qa.invoke(prompt)
+            # Retrieval augmented generation
+            retriever = vector_db.as_retriever(search_kwargs={"k": 5})
+            qa = RetrievalQA.from_chain_type(
+                llm=model,
+                chain_type="stuff",
+                retriever=retriever,
+            )
+            response = qa.invoke({"query": prompt})  # Use 'query' as the input key
         else:
             # Simple inference without vector database
-            response = model.invoke(prompt)
+            response = model.invoke(prompt)  # Directly pass the prompt for inference
 
         return response
     except Exception as e:
