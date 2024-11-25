@@ -1,6 +1,6 @@
 import os
 
-def get_tree(folder_path, content=False):
+def get_tree(folder_path, content=False, exclude_folders=None):
     """
     Generate a tree structure of the given folder path, including file names, paths, 
     and optionally their content.
@@ -8,14 +8,21 @@ def get_tree(folder_path, content=False):
     Args:
         folder_path (str): Path to the folder to generate the tree structure from.
         content (bool): Whether to include file contents in the tree. Default is False.
+        exclude_folders (list): A list of folder names to exclude from the tree.
 
     Returns:
         dict: Nested dictionary representing the folder structure.
     """
+    if exclude_folders is None:
+        exclude_folders = ["__pycache__", ".git", ".idea", "node_modules", "venv"]  # Default excluded folders
+
     def build_tree(path):
         structure = []
         if os.path.isdir(path):
             for item in os.listdir(path):
+                if item in exclude_folders:
+                    continue  # Skip excluded folders
+
                 item_path = os.path.join(path, item)
                 if os.path.isdir(item_path):
                     # Recursively add subdirectory
@@ -55,7 +62,7 @@ if __name__ == "__main__":
         # Get the tree structure without content
         tree = get_tree(old_project_path)
         print(tree)
-        
+
         # Get the tree structure with content
         tree_with_content = get_tree(old_project_path, content=True)
         print(tree_with_content)
