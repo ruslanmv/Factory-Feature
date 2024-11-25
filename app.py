@@ -1,7 +1,6 @@
 import argparse
 import os
 import shutil
-
 from src.analysis.project_parser import parse_project
 from src.analysis.dependency_resolver import resolve_dependencies
 from src.analysis.feature_mapper import map_features_to_components
