@@ -43,26 +43,3 @@ def build_vector_database(project_data, persist_directory=None):
 
 
 
-def load_vector_database(persist_directory): 
-    """
-    Loads a persisted Chroma vector database from disk.
-
-    Args:
-        persist_directory: The directory the database is persisted in. 
-                           This argument is required.
-
-    Returns:
-        Chroma: The Chroma vector database object.
-
-    Raises:
-        ValueError: If persist_directory is not provided.
-    """
-    if not persist_directory:
-        raise ValueError("persist_directory must be provided to load the database.")
-
-    embedding_function = SentenceTransformerEmbeddings(model_name="all-MiniLM-L6-v2")
-    vector_db = Chroma(
-        embedding_function=embedding_function, 
-        persist_directory=persist_directory
-    )
-    return vector_db

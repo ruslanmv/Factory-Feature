@@ -1,5 +1,5 @@
 import unittest
-from src.vector_database.db_builder import build_vector_database
+from src.vector_database.db_builder_old import build_vector_database
 from src.vector_database.db_query import query_vector_database
 
 class TestVectorDatabase(unittest.TestCase):

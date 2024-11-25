@@ -10,7 +10,7 @@ from src.generation.feature_integration import integrate_features
 from src.models.prompt_templates import get_prompt_template
 from src.utils.logger import logger
 from src.utils.file_operations import read_file, write_file
-from src.vector_database.db_builder import build_vector_database
+from src.vector_database.db_builder_old import build_vector_database
 from src.vector_database.db_query import query_vector_database
 
 from src.vector_database.db_load import load_vector_db
