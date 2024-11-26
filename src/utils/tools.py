@@ -55,3 +55,4 @@ def count_tasks_from_json(json_data: str) -> int:
     existing_tasks = len(data.get("existing_files", []))
     new_tasks = len(data.get("new_files", []))
     return existing_tasks + new_tasks
+    
