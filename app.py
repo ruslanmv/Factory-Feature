@@ -4,11 +4,34 @@ import os
 import time
 from main import main  # Importing the main function from main.py
 
-import zipfile
-import os
 
-import zipfile
-import os
+def generate_tree(path, prefix=""):
+    """Generates a tree-like representation of a directory structure."""
+    tree_str = ""
+    entries = os.listdir(path)
+    entries.sort()
+    num_entries = len(entries)
+    for i, entry in enumerate(entries):
+        full_path = os.path.join(path, entry)
+        if i == num_entries - 1:
+            connector = "└── "
+            next_prefix = prefix + "    "
+        else:
+            connector = "├── "
+            next_prefix = prefix + "│   "
+
+        tree_str += f"{prefix}{connector}{entry}\n"
+        if os.path.isdir(full_path):
+            tree_str += generate_tree(full_path, next_prefix)
+    return tree_str
+
+
+def display_tree(dummy_input):
+    """Generates and displays the directory tree for 'project_new'."""
+    if os.path.exists("project_new"):
+        return generate_tree("project_new")
+    return "The 'project_new' folder does not exist."
+
 
 def unzip_file(file_obj):
     """Unzips an uploaded zip file to the 'project_old' folder, flattening the top-level directory."""
@@ -52,6 +75,7 @@ def zip_folder():
     else:
         return "Folder 'project_new' was not found.", None
 
+
 def run_pipeline(user_request):
     """Executes the main pipeline with the provided user request."""
     try:
@@ -61,12 +85,14 @@ def run_pipeline(user_request):
     except Exception as e:
         return f"Error during pipeline execution: {e}"
 
+
 def submit_settings(api_key, project_id, watsonx_url):
     """Sets the environment variables with the provided credentials."""
     os.environ["API_KEY"] = api_key
     os.environ["PROJECT_ID"] = project_id
     os.environ["WATSONX_URL"] = watsonx_url
     return "Environment variables loaded successfully!"
+
 
 if __name__ == "__main__":
     _TITLE = "Factory Feature"
@@ -95,8 +121,10 @@ if __name__ == "__main__":
         with gr.Row():
             with gr.Column(scale=1):
                 gr.Markdown("# " + _TITLE)
+                gr.Image("./assets/logos.jpg", label="Logo", elem_id="logo-image", show_label=False)
             with gr.Column(scale=0):
                 gr.Markdown(_DUPLICATE)
+        
         gr.Markdown(_DESCRIPTION)
         gr.Markdown(_INSTRUCTIONS)
 
@@ -104,17 +132,29 @@ if __name__ == "__main__":
             with gr.TabItem("Project"):
                 with gr.Row(variant='panel'):
                     with gr.Column(scale=5):
-                        unzip_input = gr.File(file_types=['.zip'], label="Upload Old Project (ZIP)")
+                        unzip_input = gr.File(
+                        file_types=['.zip'], 
+                        label="Upload Old Project (ZIP): Remove and upload your own project if needed.",
+                        value="project_old.zip",  # Default file
+                        interactive=True  # Allow users to remove and upload their own file
+                        )                       
                         unzip_output = gr.Textbox(label="Unzip Result")
-                        unzip_button = gr.Button("Upload Project")
+                        unzip_button = gr.Button("Extract Project")
                         unzip_button.click(unzip_file, inputs=unzip_input, outputs=unzip_output)
-
-                        user_request = gr.Textbox(label="Enter your project request")
+                        user_request = gr.Textbox(
+                            label="Enter your project request",
+                            value="Add logging functionality to all major modules in the project",  # Default message
+                            lines=5,  # Number of visible lines
+                            placeholder="Enter a description of the feature you want to add to your project. For example:\nAdd logging functionality to all major modules in the project."
+                        )
                         pipeline_output = gr.Textbox(label="Pipeline Result")
                         pipeline_button = gr.Button("Generate Feature")
                         pipeline_button.click(run_pipeline, inputs=user_request, outputs=pipeline_output)
-
                     with gr.Column(scale=5):
+                        # Added button and output for displaying the tree
+                        tree_output = gr.Textbox(label="New Project Tree")
+                        tree_button = gr.Button("Display Results")
+                        tree_button.click(display_tree, inputs=None, outputs=tree_output)
                         zip_output = gr.Textbox(label="Zip Result")
                         zip_download = gr.File(label="Download New Project (ZIP)")
                         zip_button = gr.Button("Download New Project")
