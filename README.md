@@ -17,6 +17,8 @@ Factory Feature is a project that leverages Generative AI with WatsonX.ai to ana
 
 ---
 
+
+
 ## Introduction
 
 Factory Feature harnesses the power of WatsonX.ai's Large Language Models (LLMs) to automate the process of understanding, modifying, and updating software projects. It uses a Vector Database to store project components for efficient analysis and retrieval. By combining advanced AI capabilities with an intuitive workflow, Factory Feature enables developers to:
@@ -208,6 +210,17 @@ We welcome contributions from the community! To contribute:
    ```
 
 ---
+
+## Front End Application
+
+You can execute the program by doing 
+
+```bash
+python app.py
+```
+
+![](assets/2024-11-26-16-09-23.png)
+
 
 ## License
 
