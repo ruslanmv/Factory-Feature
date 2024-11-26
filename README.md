@@ -38,66 +38,89 @@ Factory Feature works seamlessly with a wide range of programming languages, lib
 - **Streamlined project updates**: Automates the process of modifying and updating software projects.
 - **Language and framework agnostic**: Supports a wide range of programming languages and technologies.
 
-## Structure of the Project
+## Project Overview
+The Factory Feature project automates feature integration into software projects, leveraging AI-driven analysis, feature mapping, and project generation techniques. This ensures scalable and efficient updates to existing codebases.
 ```
 factory-feature/
-├── project_old/                  # Folder for the original project
-│   └── ...                       # Original project files and directories
-├── project_new/                  # Folder for the generated project
-│   └── ...                       # New project files with added features
-├── src/                          # Source code directory
-│   ├── __init__.py               # Package initializer
-│   ├── main.py                   # Entry point of the application
-│   ├── vector_database/          # Module for Vector Database creation and management
+├── LICENSE.md                      # License for the project
+├── README.md                       # Main project documentation
+├── app.py                          # Main script to launch the application
+├── config/                         # Configuration files
+│   └── default_config.yaml         # Default configuration settings
+├── content.py                      # Content management script
+├── data/                           # Data and example feature requests
+│   ├── app.py                      # Example application file
+│   ├── feature_requests/           # Directory for feature request prompts
+│   │   ├── add_authentication.txt  # Feature request example for authentication
+│   │   └── improve_ui.txt          # Feature request example for UI improvement
+│   └── utils/                      # Utility scripts for data handling
+│       └── helpers.py              # Helper functions for data management
+├── docs/                           # Documentation directory
+│   ├── API_REFERENCE.md            # API reference for developers
+│   ├── CONTRIBUTING.md             # Contribution guidelines
+│   ├── README.md                   # Main documentation for the docs folder
+│   ├── STRUCUTRE.md                # Explanation of the project structure
+│   └── USAGE.md                    # Usage instructions for the project
+├── factory_feature.log             # Log file for project execution
+├── main.ipynb                      # Jupyter Notebook for interactive exploration
+├── main.py                         # Entry point for running the project
+├── project_new/                    # Folder for the updated project
+│   ├── app.py                      # Updated application file
+│   ├── requirements.txt            # Dependency list for the new project
+│   └── utils/                      # Utilities for the updated project
+│       └── helpers.py              # Updated helper functions
+├── project_new.zip                 # Compressed archive of the updated project
+├── project_old/                    # Folder for the original project
+│   ├── app.py                      # Original application file
+│   ├── requirements.txt            # Dependency list for the old project
+│   └── utils/                      # Utilities for the old project
+│       └── helpers.py              # Original helper functions
+├── project_old.zip                 # Compressed archive of the original project
+├── requirements.txt                # Python dependencies
+├── setup.py                        # Script for installing the project as a Python package
+├── src/                            # Source code directory
+│   ├── __init__.py                 # Package initializer
+│   ├── analysis/                   # Project analysis module
 │   │   ├── __init__.py
-│   │   ├── db_builder.py         # Code for building and populating the vector database
-│   │   └── db_query.py           # Code for querying the vector database
-│   ├── analysis/                 # Project analysis module
+│   │   ├── content.py              # Content extraction utilities
+│   │   ├── dependency_resolver.py  # Resolves dependencies in the project
+│   │   ├── feature_mapper.py       # Maps features to project components
+│   │   ├── project_parser.py       # Parses and analyzes project structure
+│   │   └── tree.py                 # Utilities for tree-based analysis
+│   ├── generation/                 # Feature generation module
 │   │   ├── __init__.py
-│   │   ├── project_parser.py     # Parses and analyzes the project structure
-│   │   ├── dependency_resolver.py# Resolves dependencies in the project
-│   │   └── feature_mapper.py     # Maps features to project components
-│   ├── generation/               # Feature generation module
+│   │   ├── feature_integration.py  # Integrates new features into the project
+│   │   ├── preprocessing.py        # Preprocessing utilities for feature integration
+│   │   ├── project_generator.py    # Generates updated project files
+│   │   ├── project_structure.py    # Validates and updates project structure
+│   │   └── task_prompts.py         # Generates task prompts for feature integration
+│   ├── models/                     # LLM interaction module
 │   │   ├── __init__.py
-│   │   ├── feature_integration.py# Code for integrating new features into the project
-│   │   └── project_generator.py  # Generates the updated project files
-│   ├── utils/                    # Utility functions
+│   │   ├── llm_inference.py        # Interacts with WatsonX.ai LLM
+│   │   └── prompt_templates.py     # Templates for LLM prompts
+│   ├── utils/                      # Utility scripts
 │   │   ├── __init__.py
-│   │   ├── logger.py             # Logging utilities
-│   │   ├── file_operations.py    # File I/O utilities
-│   │   └── config_loader.py      # Loads and manages configuration settings
-│   └── models/                   # LLM integration module
+│   │   ├── config_loader.py        # Loads and manages configuration settings
+│   │   ├── file_operations.py      # Utilities for file I/O
+│   │   ├── logger.py               # Logging utilities
+│   │   └── tools.py                # General-purpose tools
+│   └── vector_database/            # Module for vector database management
 │       ├── __init__.py
-│       ├── llm_inference.py      # Code for interacting with WatsonX.ai LLM
-│       └── prompt_templates.py   # Templates for LLM prompts
-├── tests/                        # Automated test suite
+│       ├── db_builder.py           # Builds vector databases
+│       ├── db_builder_simple.py    # Simplified vector database builder
+│       ├── db_load.py              # Loads vector databases
+│       ├── db_query.py             # Queries the vector database
+│       └── display_content.py      # Displays content from the vector database
+├── tests/                          # Automated test suite
 │   ├── __init__.py
-│   ├── test_main.py              # Tests for the main application logic
-│   ├── test_vector_database.py   # Tests for the Vector Database module
-│   ├── test_analysis.py          # Tests for the analysis module
-│   ├── test_generation.py        # Tests for the feature generation module
-│   └── test_utils.py             # Tests for utility functions
-├── docs/                         # Documentation directory
-│   ├── README.md                 # Main project documentation
-│   ├── CONTRIBUTING.md           # Contribution guidelines
-│   ├── USAGE.md                  # Usage instructions
-│   └── API_REFERENCE.md          # API documentation for developers
-├── data/                         # Sample data for testing
-│   ├── sample_project/           # Sample project for testing purposes
-│   └── feature_requests/         # Example feature request prompts
-│       ├── add_authentication.txt
-│       └── improve_ui.txt
-├── config/                       # Configuration files
-│   ├── default_config.yaml       # Default configuration settings
-│   └── custom_config.yaml        # User-provided configuration settings
-├── requirements.txt              # Python dependencies
-├── app.py                        # Script to run the Factory Feature application
-├── LICENSE                       # License information
-├── .gitignore                    # Git ignore rules
-└── setup.py                      # Script for installing the project as a Python package
+│   ├── test_analysis.py            # Tests for the analysis module
+│   ├── test_generation.py          # Tests for the feature generation module
+│   ├── test_main.py                # Tests for the main application logic
+│   └── test_vector_database.py     # Tests for the vector database module
+└── utils/                          # General utilities
+    ├── __init__.py
+    └── extractor.py                # Extractor utilities for data management
 ```
-
----
 
 ## Installation
 
@@ -152,7 +175,7 @@ Add a logging mechanism to the project.
 
 ### Command to Execute
 ```bash
-python app.py --prompt "Add logging functionality to all major modules in the project"
+python main.py --prompt "Add logging functionality to all major modules in the project"
 ```
 
 ### Updated Project Structure
