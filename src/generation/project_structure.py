@@ -40,16 +40,27 @@ def update_project_structure(json_data: str, task_responses: list, old_project_p
         if not overwrite and os.path.exists(new_file_path):
             logger.info(f"File exists and overwrite is disabled: {new_file_path}. Keeping the original file.")
             continue
+        # Step 3.1:  Ensure the new file directory exists
+        logger.info("Ensure the new file directory exists")
+        try:
+ 
+            new_file_dir = os.path.dirname(new_file_path)
+            if not os.path.exists(new_file_dir):
+                os.makedirs(new_file_dir)
+        except Exception as e:
+            logger.error(f"Failed to creating directories: {e}")
+            exit(1)
 
-        # Ensure the new file directory exists
-        new_file_dir = os.path.dirname(new_file_path)
-        if not os.path.exists(new_file_dir):
-            os.makedirs(new_file_dir)
-
-        # Write the updated content to the new file
-        with open(new_file_path, "w") as f:
-            f.write(updated_content)
-        logger.info(f"Updated file saved: {new_file_path}")
+        # Step 3.2:  Write the updated content to the new file
+        logger.info("Write the updated content to the new file")
+        try:         
+           
+            with open(new_file_path, "w") as f:
+                f.write(updated_content)
+            logger.info(f"Updated file saved: {new_file_path}")
+        except Exception as e:
+            logger.error(f"Failed Updated file save: {e}")
+            exit(1)
 
     # Step 4: Verify the new project structure
     logger.info("New project structure generated successfully")
