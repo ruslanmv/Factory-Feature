@@ -3,7 +3,7 @@
 ![alt text](./assets/logo.jpeg)
 
 Factory Feature is a project that leverages Generative AI with WatsonX.ai to analyze the structure and elements of an existing project directory. Using a Vector Database, the program enables efficient retrieval and analysis of project components. Based on a user-provided feature request, it generates a new version of the project with all elements updated and tailored to include the requested feature. The original project resides in the `project_old` folder, and the updated project is stored in the `project_new` folder.
-
+> *Note: This project implements the Feature-Factory algorithm as referenced in [arXiv:2411.18226](https://arxiv.org/abs/2411.18226).*
 ---
 
 ## Table of Contents
