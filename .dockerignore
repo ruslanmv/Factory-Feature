@@ -1,0 +1,78 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# Project-specific
+project_new/
+project_old/
+project_new.zip
+project_old.zip
+chroma_db/
+*.log
+*.pkl
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# CI/CD
+.github/
+.pre-commit-config.yaml
+
+# Backup
+backup/
+*.bak
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Notebooks
+*.ipynb
+.ipynb_checkpoints
+
+# Docker
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Development tools
+Makefile
+requirements.txt
+setup.py
+LICENSE.md

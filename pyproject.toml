@@ -1,0 +1,210 @@
+[project]
+name = "factory-feature"
+version = "1.0.0"
+description = "AI-powered feature integration system using IBM WatsonX.ai and vector databases for automated software project enhancement"
+authors = [
+    {name = "Ruslan Magana", email = "ruslan@ruslanmv.com"}
+]
+readme = "README.md"
+license = {text = "Apache-2.0"}
+requires-python = ">=3.9,<3.13"
+keywords = [
+    "ai",
+    "llm",
+    "watsonx",
+    "feature-generation",
+    "code-generation",
+    "vector-database",
+    "rag",
+    "langchain"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Code Generators",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "langchain==0.3.13",
+    "langchain-community==0.3.13",
+    "langchain-ibm==0.3.3",
+    "langchain-huggingface==0.1.2",
+    "langchain-chroma==0.1.4",
+    "sentence-transformers==3.3.1",
+    "ibm-watsonx-ai==1.1.21",
+    "chromadb==0.5.23",
+    "pyyaml==6.0.2",
+    "python-dotenv==1.0.1",
+    "gradio==5.7.1",
+    "torch==2.5.1",
+    "numpy==1.26.4",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.4",
+    "pytest-cov==6.0.0",
+    "black==24.10.0",
+    "ruff==0.8.4",
+    "mypy==1.13.0",
+    "pre-commit==4.0.1",
+    "ipython==8.31.0",
+    "jupyter==1.1.1",
+]
+
+[project.scripts]
+factory-feature = "src.main:main"
+
+[project.urls]
+Homepage = "https://ruslanmv.com"
+Documentation = "https://github.com/ruslanmv/Factory-Feature"
+Repository = "https://github.com/ruslanmv/Factory-Feature"
+"Bug Tracker" = "https://github.com/ruslanmv/Factory-Feature/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "black>=24.10.0",
+    "ruff>=0.8.4",
+    "mypy>=1.13.0",
+    "pre-commit>=4.0.1",
+]
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311', 'py312']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+  | backup
+  | project_old
+  | project_new
+)/
+'''
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+exclude = [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "build",
+    "dist",
+    "backup",
+    "project_old",
+    "project_new",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",  # do not perform function calls in argument defaults
+    "B905",  # zip without explicit strict parameter
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # imported but unused
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+check_untyped_defs = true
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+
+[[tool.mypy.overrides]]
+module = [
+    "langchain.*",
+    "langchain_community.*",
+    "langchain_ibm.*",
+    "langchain_huggingface.*",
+    "langchain_chroma.*",
+    "chromadb.*",
+    "sentence_transformers.*",
+    "ibm_watsonx_ai.*",
+    "ibm_watson_machine_learning.*",
+    "gradio.*",
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--strict-markers",
+    "--tb=short",
+    "--cov=src",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = [
+    "*/tests/*",
+    "*/backup/*",
+    "*/__pycache__/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+    "if TYPE_CHECKING:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
