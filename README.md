@@ -27,7 +27,6 @@
 
 **Factory Feature** is an advanced AI-powered system that revolutionizes software development by automatically integrating new features into existing codebases. Leveraging the power of IBM WatsonX.ai, vector databases, and retrieval-augmented generation (RAG), Factory Feature analyzes your project structure, understands dependencies, and intelligently generates code modifications to implement requested features.
 
-> *Note: This project implements the Feature-Factory algorithm as referenced in [arXiv:2411.18226](https://arxiv.org/abs/2411.18226).*
 
 ### 🎯 Key Highlights
 
@@ -426,3 +425,4 @@ If you find this project useful, please consider giving it a star ⭐!
 [⬆ Back to Top](#factory-feature)
 
 </div>
+
